@@ -2,10 +2,21 @@ registerServiceWorker = () => {
   if (!navigator.serviceWorker) return;
 
   navigator.serviceWorker.register('/sw.js').then(function (reg) {
-    console.log('Registration Worked!');
+    console.log('Registration Worked!', reg);
     if (!navigator.serviceWorker.controller) {
       return;
     }
+  //  var form = document.getElementById('formular')
+  /*
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var message = {
+          phoneNumber: phoneNumberField.value,
+          body: bodyField.value
+  };
+        alert("eeee")
+        // do more stuff here
+  });*/
 
   }).catch(function () {
     console.log('Registration failed!')

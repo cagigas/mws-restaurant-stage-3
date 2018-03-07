@@ -202,7 +202,9 @@ newComment = (form) => {
     var store = tx.objectStore('outboxreviews');
     store.put(review)
   }).then(function() {
-      return reg.sync.register('outboxreviews');
+      navigator.serviceWorker.ready.then(function(reg) {
+        return reg.sync.register('outboxreviews');
+      })
   }).catch(function(err) {
       // something went wrong with the database or the sync registration, log and submit the form
       console.error(err);
@@ -234,6 +236,7 @@ newComment = (form) => {
 
    const form = document.createElement('form');
    form.method = 'GET'
+   form.id = 'formular'
    //form.action = 'http://localhost:1337/reviews/'
    //form.action = 'javascript:newComment();'
    form.setAttribute("onsubmit","newComment();return false;");
