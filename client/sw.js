@@ -1,6 +1,6 @@
 'use strict';
 
-var CACHE_NAME = 'restaurant-cache-54';
+var CACHE_NAME = 'restaurant-cache-62';
 
 self.addEventListener('install', function (event) {
   // Perform install steps
@@ -56,4 +56,11 @@ self.addEventListener('fetch', event => {
     })
     .catch(err => console.log(err, event.request))
   );
+});
+
+self.addEventListener('sync', function(event) {
+  event.waitUntil(
+      // do asynchronous tasks here
+    console.log("eeeeeeeeeee")
+    );
 });

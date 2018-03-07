@@ -16,10 +16,9 @@ openDatabase = () => {
   return idb.open('restaurants', 1, upgradeDB => {
     switch (upgradeDB.oldVersion) {
       case 0:
-        /*const store = */upgradeDB.createObjectStore('restaurants', {keyPath: 'id'})
-        //store.createIndex('neighborhood', 'neighborhood')
+        const store = upgradeDB.createObjectStore('restaurants', {keyPath: 'id'})
         upgradeDB.createObjectStore('reviews', {keyPath: 'id'})
-        //store.createIndex('neighborhood', 'neighborhood')
+        upgradeDB.createObjectStore('outboxreviews', {autoIncrement : true, keyPath: 'id'})
     }
   })
 }
@@ -27,6 +26,7 @@ openDatabase = () => {
 
 registerServiceWorker();
 const dbPromise = openDatabase()
+console.log('dbPromise', dbPromise)
 
 fetch('http://localhost:1337/reviews')
   .then(function(response) {
@@ -36,6 +36,7 @@ fetch('http://localhost:1337/reviews')
     dbPromise.then(function(db) {
       if(!db) return;
       var tx = db.transaction('reviews', 'readwrite');
+      console.log('tx', tx)
       var store = tx.objectStore('reviews');
       reviews.map((review)=>{
         store.put(review)

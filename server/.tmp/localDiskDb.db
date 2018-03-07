@@ -21,7 +21,7 @@
           "Sunday": "12:00 pm - 4:00 pm, 5:30 pm - 11:00 pm"
         },
         "createdAt": 1504095563444,
-        "updatedAt": "2018-03-07T16:04:25.348Z",
+        "updatedAt": "2018-03-07T18:49:51.649Z",
         "id": 1,
         "is_favorite": "false"
       },
@@ -45,8 +45,8 @@
           "Sunday": "12:00 pm - 3:00 pm, 5:00 pm - 11:00 pm"
         },
         "createdAt": 1504095568414,
-        "updatedAt": "2017-09-14T14:05:54.800Z",
-        "is_favorite": false,
+        "updatedAt": "2018-03-07T18:47:58.938Z",
+        "is_favorite": "true",
         "id": 2
       },
       {
@@ -512,166 +512,67 @@
         "id": 31
       },
       {
-        "name": "david",
-        "restaurant_id": "1",
-        "rating": "4",
-        "comments": "blablablabla",
-        "createdAt": "2018-03-07T11:57:46.593Z",
-        "updatedAt": "2018-03-07T11:57:46.593Z",
-        "id": 32
-      },
-      {
-        "name": "david",
-        "restaurant_id": "{1}",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T12:57:08.677Z",
-        "updatedAt": "2018-03-07T12:57:08.677Z",
-        "id": 33
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "",
+        "restaurant_id": 2,
+        "name": "eeea",
         "rating": "2",
         "comments": "asd",
-        "createdAt": "2018-03-07T12:59:04.734Z",
-        "updatedAt": "2018-03-07T12:59:04.734Z",
-        "id": 34
+        "createdAt": "2018-03-07T19:34:11.551Z",
+        "updatedAt": "2018-03-07T19:34:11.551Z",
+        "id": 54
       },
       {
+        "restaurant_id": 2,
+        "name": "mmmno",
+        "rating": "2",
+        "comments": "asdsad",
+        "createdAt": "2018-03-07T19:40:50.082Z",
+        "updatedAt": "2018-03-07T19:40:50.082Z",
+        "id": 55
+      },
+      {
+        "restaurant_id": 2,
         "name": "asd",
-        "restaurant_id": "",
         "rating": "2",
         "comments": "asd",
-        "createdAt": "2018-03-07T12:59:20.399Z",
-        "updatedAt": "2018-03-07T12:59:20.399Z",
-        "id": 35
+        "createdAt": "2018-03-07T19:44:48.157Z",
+        "updatedAt": "2018-03-07T19:44:48.157Z",
+        "id": 56
       },
       {
-        "name": "asd",
-        "restaurant_id": "",
+        "restaurant_id": 2,
+        "name": "2222a",
         "rating": "2",
-        "comments": "asd",
-        "createdAt": "2018-03-07T12:59:22.060Z",
-        "updatedAt": "2018-03-07T12:59:22.060Z",
-        "id": 36
+        "comments": "asdasdsad",
+        "createdAt": "2018-03-07T19:45:58.052Z",
+        "updatedAt": "2018-03-07T19:45:58.052Z",
+        "id": 57
       },
       {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "2",
-        "createdAt": "2018-03-07T12:59:29.280Z",
-        "updatedAt": "2018-03-07T12:59:29.280Z",
-        "id": 37
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "2",
-        "createdAt": "2018-03-07T12:59:37.644Z",
-        "updatedAt": "2018-03-07T12:59:37.644Z",
-        "id": 38
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "2",
-        "createdAt": "2018-03-07T12:59:39.734Z",
-        "updatedAt": "2018-03-07T12:59:39.734Z",
-        "id": 39
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T12:59:47.002Z",
-        "updatedAt": "2018-03-07T12:59:47.002Z",
-        "id": 40
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:01:31.177Z",
-        "updatedAt": "2018-03-07T13:01:31.177Z",
-        "id": 41
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:01:33.960Z",
-        "updatedAt": "2018-03-07T13:01:33.960Z",
-        "id": 42
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:01:44.802Z",
-        "updatedAt": "2018-03-07T13:01:44.802Z",
-        "id": 43
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:01:47.222Z",
-        "updatedAt": "2018-03-07T13:01:47.222Z",
-        "id": 44
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:01:56.764Z",
-        "updatedAt": "2018-03-07T13:01:56.764Z",
-        "id": 45
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:02:25.241Z",
-        "updatedAt": "2018-03-07T13:02:25.241Z",
-        "id": 46
-      },
-      {
-        "name": "asd",
-        "restaurant_id": "1",
+        "restaurant_id": 2,
+        "name": "222aaaaaa",
         "rating": "3",
         "comments": "asd",
-        "createdAt": "2018-03-07T13:03:54.594Z",
-        "updatedAt": "2018-03-07T13:03:54.594Z",
-        "id": 47
+        "createdAt": "2018-03-07T19:47:12.713Z",
+        "updatedAt": "2018-03-07T19:47:12.713Z",
+        "id": 58
       },
       {
-        "name": "asd",
-        "restaurant_id": "1",
-        "rating": "2",
-        "comments": "asdasd",
-        "createdAt": "2018-03-07T13:06:02.480Z",
-        "updatedAt": "2018-03-07T13:06:02.480Z",
-        "id": 48
+        "restaurant_id": 1,
+        "name": "123",
+        "rating": "3",
+        "comments": "123",
+        "createdAt": "2018-03-07T19:59:01.025Z",
+        "updatedAt": "2018-03-07T19:59:01.025Z",
+        "id": 59
       },
       {
-        "name": "David",
-        "rating": "8",
-        "restaurant_id": "1",
-        "comments": "una puta mierda joder",
-        "createdAt": "2018-03-07T13:30:59.237Z",
-        "updatedAt": "2018-03-07T13:30:59.237Z",
-        "id": 49
+        "restaurant_id": 1,
+        "name": "123",
+        "rating": "3",
+        "comments": "123",
+        "createdAt": "2018-03-07T19:59:06.820Z",
+        "updatedAt": "2018-03-07T19:59:06.820Z",
+        "id": 60
       }
     ]
   },
@@ -727,7 +628,7 @@
       "id": 10
     },
     "reviews": {
-      "id": 49
+      "id": 60
     }
   }
 }

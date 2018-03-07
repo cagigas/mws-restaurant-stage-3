@@ -46,17 +46,34 @@ fetchRestaurantFromURL = (callback) => {
 }
 
 favoriteRestaurant = (fav) => {
+  const name = document.getElementById('restaurant-name');
+  console.log(fav, self.restaurant.name, name)
+  if(fav){
+    name.innerHTML = `${self.restaurant.name}
+    <svg class='heart' onClick="favoriteRestaurant(false)" viewBox="0 0 32 29.6">
+      <path fill="red" id='heart' d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+        c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+    </svg>`
+  }else{
+    name.innerHTML = `${self.restaurant.name}
+    <svg class='heart' onClick="favoriteRestaurant(true)" viewBox="0 0 32 29.6">
+      <path fill="red" id='heart' stroke="red" fill-opacity="0" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+        c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+    </svg>`
+  }
+
   fetch(`http://localhost:1337/restaurants/${self.restaurant.id}/?is_favorite=${fav}`, {method: 'PUT'})
     .then(function(response) {
       return response.json();
     })
     .then(function(restaurant) {
-      console.log(restaurant)
       const dbPromise = idb.open('restaurants', 1)
+      console.log('dbPromise', dbPromise)
       dbPromise.then(function(db) {
         if(!db) return;
         var tx = db.transaction('restaurants', 'readwrite');
-        var store = tx.objectStore('reviews');
+        console.log(tx)
+        var store = tx.objectStore('restaurants');
         store.put(restaurant)
       })
     })
@@ -65,25 +82,24 @@ favoriteRestaurant = (fav) => {
     });
 
 }
+
 /**
  * Create restaurant HTML and add it to the webpage
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   console.log(restaurant)
   const name = document.getElementById('restaurant-name');
-  name.innerHTML = restaurant.name
 
-
-  if(restaurant.is_favorite){
+  if(restaurant.is_favorite === true || restaurant.is_favorite === 'true'){
     name.innerHTML = `${restaurant.name}
     <svg class='heart' onClick="favoriteRestaurant(false)" viewBox="0 0 32 29.6">
-      <path fill="red" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+      <path fill="red" id='heart' d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
         c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
     </svg>`
   }else{
     name.innerHTML = `${restaurant.name}
     <svg class='heart' onClick="favoriteRestaurant(true)" viewBox="0 0 32 29.6">
-      <path fill="red" stroke="red" fill-opacity="0" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+      <path fill="red" id='heart' stroke="red" fill-opacity="0" d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
         c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
     </svg>`
   }
@@ -160,6 +176,53 @@ fillReviewsHTML = (reviews = self.reviews) => {
   container.appendChild(ul);
 }
 
+newComment = (form) => {
+  /*const comment = {
+    "restaurant_id": self.restaurant.id,
+    "name": document.getElementById("name").value,
+    "rating": document.getElementById("rating").value,
+    "comments": document.getElementById("comments").value,
+  }*/
+  const review = {
+    "restaurant_id": self.restaurant.id,
+    "name": document.getElementById("name").value,
+    "rating": document.getElementById("rating").value,
+    "comments": document.getElementById("comments").value,
+    "createdAt": new Date()
+  }
+
+  const ul = document.getElementById('reviews-list');
+  ul.insertBefore(createReviewHTML(review), ul.lastChild);
+
+  const dbPromise = idb.open('restaurants', 1)
+  console.log('dbPromise', review)
+  dbPromise.then(function(db) {
+    if(!db) return;
+    var tx = db.transaction('outboxreviews', 'readwrite');
+    var store = tx.objectStore('outboxreviews');
+    store.put(review)
+  }).then(function() {
+      return reg.sync.register('outboxreviews');
+  }).catch(function(err) {
+      // something went wrong with the database or the sync registration, log and submit the form
+      console.error(err);
+      //form.submit();
+   });
+/*
+  fetch('http://localhost:1337/reviews/', {
+    method: 'post',
+    body: JSON.stringify(comment),
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(review) {
+    })
+    .catch((err) => {
+      console.log("Fav rest err: ", err)
+    });*/
+
+}
 /**
  * Create review HTML and add it to the webpage.
  */
@@ -170,8 +233,10 @@ fillReviewsHTML = (reviews = self.reviews) => {
    li.tabIndex = '0';
 
    const form = document.createElement('form');
-   form.method = 'POST'
-   form.action = 'http://localhost:1337/reviews/'
+   form.method = 'GET'
+   //form.action = 'http://localhost:1337/reviews/'
+   //form.action = 'javascript:newComment();'
+   form.setAttribute("onsubmit","newComment();return false;");
 
    const ul = document.createElement('ul');
    ul.id = 'restaurant-basic-nav';
@@ -179,6 +244,7 @@ fillReviewsHTML = (reviews = self.reviews) => {
    p = document.createElement('p');
    input = document.createElement('input');
    input.type = "name"
+   input.id = "name"
    input.placeholder = "Name"
    input.name = "name"
    p.appendChild(input);
@@ -190,6 +256,7 @@ fillReviewsHTML = (reviews = self.reviews) => {
    input = document.createElement('input');
    input.type = "number"
    input.placeholder = "Rating"
+   input.id = "rating"
    input.name = "rating"
    input.min = "0"
    input.max = "5"
@@ -198,17 +265,12 @@ fillReviewsHTML = (reviews = self.reviews) => {
    p.appendChild(input);
    form.appendChild(p);
 
-   input = document.createElement('input');
-   input.type = "hidden"
-   input.value = self.restaurant.id
-   input.name = "restaurant_id"
-   form.appendChild(input);
-
    p = document.createElement('p');
    p.id = 'restaurant-comment';
    const textarea = document.createElement('textarea');
    textarea.placeholder = "Comments"
    textarea.name = "comments"
+   textarea.id = "comments"
    textarea.maxlength = "140"
    textarea.rows = "5"
    p.appendChild(textarea);
