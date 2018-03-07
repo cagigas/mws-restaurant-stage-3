@@ -1,0 +1,21 @@
+{
+  "name": "idb",
+  "version": "2.0.4",
+  "description": "IndexedDB but with promises",
+  "main": "lib/node.js",
+  "browser": "lib/idb.js",
+  "typings": "lib/idb.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "gulp serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cagigas"
+  },
+  "author": "David Gonzalez Cagigas",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
