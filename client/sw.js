@@ -1,6 +1,6 @@
 'use strict';
 
-var CACHE_NAME = 'restaurant-cache-76';
+var CACHE_NAME = 'restaurant-cache-80';
 
 self.addEventListener('install', function (event) {
   // Perform install steps
@@ -52,18 +52,17 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request, {ignoreSearch:true}).then(response => {
+      console.log(response || event.request)
       return response || fetch(event.request);
     })
     .catch(err => console.log(err, event.request))
   );
 });
 //https://www.twilio.com/blog/2017/02/send-messages-when-youre-back-online-with-service-workers-and-background-sync.html
-self.addEventListener('sync', function(event) {
+/*self.addEventListener('sync', function(event) {
   event.waitUntil(
-
-    //const dbPromise = idb.open('restaurants', 1)
-    console.log("2222", idb)
-    /*dbPromise.then(function(db) {
+    console.log("eee")
+    /*idb.open('restaurants', 1).then(function(db) {
 
       if(!db) return;
       var tx = db.transaction('outboxreviews');
@@ -79,6 +78,6 @@ self.addEventListener('sync', function(event) {
         //form.submit();
 });*/
 
-
+/*
   );
-});
+});*/

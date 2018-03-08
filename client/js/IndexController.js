@@ -1,6 +1,5 @@
 registerServiceWorker = () => {
   if (!navigator.serviceWorker) return;
-
   navigator.serviceWorker.register('/sw.js').then(function (reg) {
     console.log('Registration Worked!', reg);
     if (!navigator.serviceWorker.controller) {
@@ -13,7 +12,7 @@ registerServiceWorker = () => {
         var message = {
           phoneNumber: phoneNumberField.value,
           body: bodyField.value
-  };
+        };
         alert("eeee")
         // do more stuff here
   });*/

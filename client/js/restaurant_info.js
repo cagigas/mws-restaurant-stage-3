@@ -193,7 +193,7 @@ newComment = (form) => {
 
   const ul = document.getElementById('reviews-list');
   ul.insertBefore(createReviewHTML(review), ul.lastChild);
-
+/*
   const dbPromise = idb.open('restaurants', 1)
   console.log('dbPromise', review)
   dbPromise.then(function(db) {
@@ -209,8 +209,8 @@ newComment = (form) => {
       // something went wrong with the database or the sync registration, log and submit the form
       console.error(err);
       //form.submit();
-   });
-/*
+   });*/
+
   fetch('http://localhost:1337/reviews/', {
     method: 'post',
     body: JSON.stringify(comment),
@@ -222,7 +222,7 @@ newComment = (form) => {
     })
     .catch((err) => {
       console.log("Fav rest err: ", err)
-    });*/
+    });
 
 }
 /**
