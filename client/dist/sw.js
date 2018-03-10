@@ -1,6 +1,8 @@
 'use strict';
+importScripts('/js/idb.js');
+importScripts('/js/store.js');
 
-var CACHE_NAME = 'restaurant-cache-80';
+var CACHE_NAME = 'restaurant-cache-1';
 
 self.addEventListener('install', function (event) {
   // Perform install steps
@@ -14,25 +16,27 @@ self.addEventListener('install', function (event) {
           'css/styles.css',
           'css/responsive.css',
           'js/dbhelper.js',
+          'js/lazyload.js',
           'js/main.js',
           'js/idb.js',
           'js/IndexController.js',
           'js/restaurant_info.js',
-          'data/restaurants.json',
-          'img/1.jpg',
-          'img/2.jpg',
-          'img/3.jpg',
-          'img/4.jpg',
-          'img/5.jpg',
-          'img/6.jpg',
-          'img/7.jpg',
-          'img/8.jpg',
-          'img/9.jpg',
-          'img/10.jpg'
+          'js/store.js',
+          'img/1.webp',
+          'img/2.webp',
+          'img/3.webp',
+          'img/4.webp',
+          'img/5.webp',
+          'img/6.webp',
+          'img/7.webp',
+          'img/8.webp',
+          'img/9.webp',
+          'img/10.webp'
         ]);
       })
   );
 });
+
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
@@ -52,32 +56,33 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request, {ignoreSearch:true}).then(response => {
-      console.log(response || event.request)
       return response || fetch(event.request);
     })
     .catch(err => console.log(err, event.request))
   );
 });
+
 //https://www.twilio.com/blog/2017/02/send-messages-when-youre-back-online-with-service-workers-and-background-sync.html
-/*self.addEventListener('sync', function(event) {
+self.addEventListener('sync', function(event) {
   event.waitUntil(
-    console.log("eee")
-    /*idb.open('restaurants', 1).then(function(db) {
-
-      if(!db) return;
-      var tx = db.transaction('outboxreviews');
-      var store = tx.objectStore('outboxreviews');
-      console.log(store, store.getAll())
-      return store.getAll();
-    }).then(function(reviews) {
-      console.log("Reviews: ", reviews)
-
-    }).catch(function(err) {
-        // something went wrong with the database or the sync registration, log and submit the form
-        console.error(err);
-        //form.submit();
-});*/
-
-/*
+    store.outbox('readonly').then(function(outbox) {
+      return outbox.getAll();
+    }).then(function(messages) {
+      return Promise.all(
+        messages.map(function(message) {
+          console.log("Fetching :)")
+          return fetch('http://localhost:1337/reviews/', {
+            method: 'POST',
+            body: JSON.stringify(message)
+          }).then(function(response) {  
+            return response.json();
+          }).then(function(data) {
+            console.log(data)
+            return store.outbox('readwrite').then(function(outbox) {
+              return outbox.delete(message.id);
+            });
+          })
+        }))
+      })
   );
-});*/
+})
