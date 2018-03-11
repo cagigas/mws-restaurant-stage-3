@@ -141,6 +141,10 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   line-height: 1;
   margin: 0 20px;
 }
+.filter-options label {
+  color: white;
+}
+
 .filter-options select {
   background-color: white;
   border: 1px solid #fff;
@@ -193,7 +197,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
   font-size: 11pt;
 }
 #restaurants-list li a {
-  background-color: orange;
+  background-color: #cb8300;
   border-bottom: 3px solid #eee;
   color: #fff;
   display: inline-block;

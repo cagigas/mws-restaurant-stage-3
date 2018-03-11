@@ -232,12 +232,12 @@ newComment = (form) => {
    date.innerHTML = new Date(review.createdAt).toLocaleString();
    date.id = 'restaurant-date';
 
-   const ul = document.createElement('ul');
-   ul.id = 'restaurant-basic-nav';
+   const div = document.createElement('div');
+   div.id = 'restaurant-basic-nav';
 
-   ul.appendChild(name);
-   ul.appendChild(date);
-   li.appendChild(ul);
+   div.appendChild(name);
+   div.appendChild(date);
+   li.appendChild(div);
 
 
    const rating = document.createElement('p');

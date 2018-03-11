@@ -2,7 +2,7 @@
 importScripts('/js/idb.js');
 importScripts('/js/store.js');
 
-var CACHE_NAME = 'restaurant-cache-1';
+var CACHE_NAME = 'restaurant-cache-15';
 
 self.addEventListener('install', function (event) {
   // Perform install steps
